@@ -8,6 +8,36 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Grid.Resources>
+            <CollectionViewSource x:Name="SentimentCol" Source="{x:Bind SentimentResults}" IsSourceGrouped="False" />
+        </Grid.Resources>
+        <TextBlock x:Name="tblTitle" HorizontalAlignment="Left" Margin="337,97,0,0" TextWrapping="Wrap" Text="UWP Cognitive Service Text Analytics - Sentiment Demo" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" />
+        <TextBlock x:Name="tblTExt" HorizontalAlignment="Left" Margin="100,162,0,0" TextWrapping="Wrap" Text="Enter Your Text for Sentiment Analysis" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" />
+        <TextBox x:Name="txtInput" HorizontalAlignment="Left" Margin="450,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="566" FontSize="20" />
+        <Button x:Name="btnSentiment" HorizontalAlignment="Left" Margin="1050,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.6,0.312" ToolTipService.ToolTip="Click to Key Phrase" Click="btnSentiment_Click">
+            <SymbolIcon Symbol="Find"></SymbolIcon>
+        </Button>
+        <GridView x:Name="gvSentiment" ItemsSource="{Binding Source={StaticResource SentimentCol}}" SelectionMode="None" IsItemClickEnabled="False" HorizontalAlignment="Left" Height="276" Margin="96,233,0,0" VerticalAlignment="Top" Width="1054">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="AliceBlue" Width="330" Height="38" Margin="8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="1" Margin="3,3,3,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Margin="0,0,0,-143">
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding stco.Scores}" Style="{StaticResource CaptionTextBlockStyle}" Height="28" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>
